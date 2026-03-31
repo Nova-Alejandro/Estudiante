@@ -1,124 +1,124 @@
-estudiantes = []
+students = []
 
-def pedir_numero(mensaje):
+def get_number(message):
     while True:
         try:
-            numero = int(input(mensaje))
-            return numero
+            number = int(input(message))
+            return number
         except:
-            print("Error: debes ingresar un número válido")
+            print("Error: you must enter a valid number")
 
 
-def pedir_texto(mensaje):
+def get_text(message):
     while True:
-        texto = input(mensaje)
-        if texto.strip() == "":
-            print("Error: no puedes dejar esto vacío")
+        text = input(message)
+        if text.strip() == "":
+            print("Error: this field cannot be empty")
         else:
-            return texto
+            return text
 
 
-def agregar_estudiante():
-    cantidad = pedir_numero("¿Cuántos estudiantes deseas agregar?: ")
+def add_student():
+    quantity = get_number("How many students do you want to add?: ")
 
-    for i in range(cantidad):
-        print(f"\nEstudiante {i+1}")
+    for i in range(quantity):
+        print(f"\nStudent {i+1}")
 
-        nombre = pedir_texto("Nombre: ")
-        edad = pedir_numero("Edad: ")
-        curso = pedir_texto("Curso: ")
+        name = get_text("Name: ")
+        age = get_number("Age: ")
+        course = get_text("Course: ")
 
-        id_estudiante = len(estudiantes) + 1
+        student_id = len(students) + 1
 
-        estudiante = {
-            "id": id_estudiante,
-            "nombre": nombre,
-            "edad": edad,
-            "curso": curso
+        student = {
+            "id": student_id,
+            "name": name,
+            "age": age,
+            "course": course
         }
 
-        estudiantes.append(estudiante)
-        print("Estudiante agregado correctamente")
+        students.append(student)
+        print("Student added successfully")
 
 
-def mostrar_estudiantes():
-    if len(estudiantes) == 0:
-        print("No hay estudiantes registrados")
+def show_students():
+    if len(students) == 0:
+        print("There are no registered students")
     else:
-        print("\nLista de estudiantes:")
-        for estudiante in estudiantes:
+        print("\nStudent list:")
+        for student in students:
             print("----------------------")
-            print("ID:", estudiante["id"])
-            print("Nombre:", estudiante["nombre"])
-            print("Edad:", estudiante["edad"])
-            print("Curso:", estudiante["curso"])
+            print("ID:", student["id"])
+            print("Name:", student["name"])
+            print("Age:", student["age"])
+            print("Course:", student["course"])
 
 
-def buscar_estudiante():
-    if len(estudiantes) == 0:
-        print("No hay estudiantes para buscar")
+def search_student():
+    if len(students) == 0:
+        print("There are no students to search")
         return
 
-    id_buscar = pedir_numero("Ingresa el ID del estudiante: ")
+    id_to_search = get_number("Enter the student ID: ")
 
-    encontrado = False
+    found = False
 
-    for est in estudiantes:
-        if est["id"] == id_buscar:
-            print("\nEstudiante encontrado:")
-            print("Nombre:", est["nombre"])
-            print("Edad:", est["edad"])
-            print("Curso:", est["curso"])
-            encontrado = True
+    for student in students:
+        if student["id"] == id_to_search:
+            print("\nStudent found:")
+            print("Name:", student["name"])
+            print("Age:", student["age"])
+            print("Course:", student["course"])
+            found = True
             break
 
-    if not encontrado:
-        print("No se encontró el estudiante")
+    if not found:
+        print("Student not found")
 
 
-def eliminar_estudiante():
-    if len(estudiantes) == 0:
-        print("No hay estudiantes para eliminar")
+def delete_student():
+    if len(students) == 0:
+        print("There are no students to delete")
         return
 
-    id_eliminar = pedir_numero("Ingresa el ID a eliminar: ")
+    id_to_delete = get_number("Enter the ID to delete: ")
 
-    encontrado = False
+    found = False
 
-    for est in estudiantes:
-        if est["id"] == id_eliminar:
-            estudiantes.remove(est)
-            print("Estudiante eliminado correctamente")
-            encontrado = True
+    for student in students:
+        if student["id"] == id_to_delete:
+            students.remove(student)
+            print("Student deleted successfully")
+            found = True
             break
 
-    if not encontrado:
-        print("No se encontró el estudiante")
+    if not found:
+        print("Student not found")
 
 
 while True:
     print("""
-======== MENÚ ========
-1.Agregar estudiante
-2. Mostrar estudiantes
-3. Buscar estudiante
-4. Eliminar estudiante
-5. Salir
+======== MENU ========
+Add student
+Show students
+Search student
+Delete student
+Exit
 =====================
 """)
 
-    opcion = input("Elige una opción: ")
+    option = input("Choose an option: ")
 
-    if opcion == "1":
-        agregar_estudiante()
-    elif opcion == "2":
-        mostrar_estudiantes()
-    elif opcion == "3":
-        buscar_estudiante()
-    elif opcion == "4":
-        eliminar_estudiante()
-    elif opcion == "5":
-        print("Programa terminado")
+    if option == "1":
+        add_student()
+    elif option == "2":
+        show_students()
+    elif option == "3":
+        search_student()
+    elif option == "4":
+        delete_student()
+    elif option == "5":
+        print("Program finished")
         break
     else:
-        print("Opción inválida")
+        print("Invalid option")
