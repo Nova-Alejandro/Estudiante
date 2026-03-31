@@ -4,7 +4,7 @@ Description
 
 A Python program to manage a basic student record system from the console. It allows adding, displaying, searching, and deleting students.
 
-*Features*
+Features
 
 Add one or multiple students
 Display all registered students
@@ -20,7 +20,7 @@ name
 age
 course
 
-# Validations
+Validations
 
 Ensures numeric inputs are valid
 Prevents empty inputs
