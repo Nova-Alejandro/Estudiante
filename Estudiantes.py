@@ -1,74 +1,43 @@
 students = []
 
-def get_number(message):
-    while True:
-        try:
-            number = int(input(message))
-            return number
-        except:
-            print("Error: you must enter a valid number")
-
-
-def get_text(message):
-    while True:
-        text = input(message)
-        if text.strip() == "":
-            print("Error: this field cannot be empty")
-        else:
-            return text
-
-
 def add_student():
-    quantity = get_number("How many students do you want to add?: ")
-
-    for i in range(quantity):
-        print(f"\nStudent {i+1}")
-
-        name = get_text("Name: ")
-        age = get_number("Age: ")
-        course = get_text("Course: ")
-
+    try:
+        quantity_students = int(input("How many students do you want to add?: "))
         student_id = len(students) + 1
 
-        student = {
-            "id": student_id,
-            "name": name,
-            "age": age,
-            "course": course
-        }
+        for idx in range(quantity_students):
+            name = input(f"Enter the name of student {idx+1}: ")
+            course = input(f"Enter the course of student {idx+1}: ")
 
-        students.append(student)
-        print("Student added successfully")
+            new_student = {
+                "id_student": student_id,
+                "name": name,
+                "course": course,
+            }
+
+            students.append(new_student)
+            print(f"Student {name} has been added successfully")
+            student_id += 1
+
+    except:
+        print("Error: invalid input")
 
 
 def show_students():
-    if len(students) == 0:
-        print("There are no registered students")
+    if not students:
+        print("There are no students")
     else:
-        print("\nStudent list:")
         for student in students:
-            print("----------------------")
-            print("ID:", student["id"])
-            print("Name:", student["name"])
-            print("Age:", student["age"])
-            print("Course:", student["course"])
+            print(f"ID: {student['id_student']} | Name: {student['name']} | Course: {student['course']}")
 
 
 def search_student():
-    if len(students) == 0:
-        print("There are no students to search")
-        return
-
-    id_to_search = get_number("Enter the student ID: ")
-
+    search_id = int(input("Enter the student ID you want to search: "))
     found = False
 
     for student in students:
-        if student["id"] == id_to_search:
-            print("\nStudent found:")
-            print("Name:", student["name"])
-            print("Age:", student["age"])
-            print("Course:", student["course"])
+        if search_id == student['id_student']:
+            print(f"ID: {student['id_student']} | Name: {student['name']} | Course: {student['course']}")
             found = True
             break
 
@@ -77,18 +46,13 @@ def search_student():
 
 
 def delete_student():
-    if len(students) == 0:
-        print("There are no students to delete")
-        return
-
-    id_to_delete = get_number("Enter the ID to delete: ")
-
+    delete_id = int(input("Enter the student ID to delete: "))
     found = False
 
     for student in students:
-        if student["id"] == id_to_delete:
+        if student['id_student'] == delete_id:
             students.remove(student)
-            print("Student deleted successfully")
+            print("Student has been deleted")
             found = True
             break
 
@@ -97,17 +61,19 @@ def delete_student():
 
 
 while True:
-    print("""
-======== MENU ========
-Add student
-Show students
-Search student
-Delete student
-Exit
-=====================
-""")
+    option = input("""
+================================
+    What do you want to do?
 
-    option = input("Choose an option: ")
+    
+1.Add new students
+2.Show students
+3.Search student
+4.Delete a student
+5.Exit program
+================================
+
+Choose an option: """)
 
     if option == "1":
         add_student()
@@ -118,7 +84,7 @@ Exit
     elif option == "4":
         delete_student()
     elif option == "5":
-        print("Program finished")
+        print("Exiting the program. Thanks for using it <3")
         break
     else:
-        print("Invalid option")
+        print("Invalid option, please try again")
